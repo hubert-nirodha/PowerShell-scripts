@@ -1,0 +1,35 @@
+
+
+### Pseudocode for CreateRestorePoint.ps1 script
+
+1. **Check if running as an administrator:**
+   - If not an administrator, display a message and exit.
+
+2. **Function to test if the script is running on Windows:**
+   - If PowerShell version is less than 5, display a message and exit.
+   - If not running on Windows, display a message and exit.
+
+3. **Call the function to test the operating system.**
+
+4. **Function to test if System Protection is enabled on a specific drive:**
+   - Try to run the `vssadmin list shadowstorage` command and capture the output.
+   - If the output contains the specified drive, display a message indicating System Protection is enabled.
+   - If not, display a message indicating System Protection is not enabled and return `false`.
+   - If an error occurs, display the error message and return `false`.
+
+5. **Prompt the user to create and name a restore point:**
+   - If the user responds "Yes":
+     - Display a message indicating the user's choice.
+     - Check if System Protection is enabled on the C: drive.
+     - If enabled, display a message and proceed.
+     - If not enabled, prompt the user to enable System Protection on the C: drive.
+       - If the user responds "Yes", enable System Protection and proceed.
+       - If the user responds "No", display a message and exit.
+     - Prompt the user to enter a name for the restore point.
+     - Provide a list of restore point types for the user to select.
+       - If the user doesn't select a type, display a message and exit.
+     - Create the restore point with the specified name and type.
+     - Display a success message.
+     - List all existing restore points.
+   - If the user responds "No", display a message and exit.
+   - If the input is invalid, display a message and exit.
